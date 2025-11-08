@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>o_edu_economiza — Simulador de Aposentadoria</title>
+  <meta name="description" content="Simulador de aposentadoria: veja quanto acumula até se aposentar e qual aporte mensal seria necessário para alcançar a renda desejada.">
+  <meta property="og:title" content="Simulador de Aposentadoria — o_edu_economiza">
+  <meta property="og:description" content="Calcule o patrimônio futuro, renda passiva estimada e o aporte necessário para sua meta.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="og-cover.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="app-header">
+  <div class="brand">
+    <div class="logo" aria-hidden="true">₵</div>
+    <div>
+      <h1>o_edu_economiza</h1>
+      <p class="muted">Simulador de aposentadoria — mesmos visuais do analisador.</p>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="card hero">
+    <div class="hero-text">
+      <h2>Simulador de Aposentadoria</h2>
+      <p class="muted">Informe idades, aporte inicial, aportes mensais possíveis e (opcional) a renda passiva desejada.</p>
+    </div>
+    <a id="voltar" class="btn" href="./index.html">← Voltar ao analisador</a>
+  </section>
+
+  <section class="card">
+    <h2>1) Idades</h2>
+    <div class="grid">
+      <label class="field">
+        <span>Idade atual</span>
+        <input inputmode="numeric" type="text" id="age_now" placeholder="ex.: 30">
+      </label>
+      <label class="field">
+        <span>Idade para se aposentar</span>
+        <input inputmode="numeric" type="text" id="age_retire" placeholder="ex.: 60">
+      </label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>2) Aportes</h2>
+    <div class="grid">
+      <label class="field">
+        <span>Aporte inicial (à vista hoje)</span>
+        <input inputmode="decimal" type="text" id="pv" placeholder="R$ 0,00">
+      </label>
+      <label class="field">
+        <span>Aportes mensais possíveis</span>
+        <input inputmode="decimal" type="text" id="pmt" placeholder="R$ 0,00">
+        <small class="muted">Deixe vazio para o sistema calcular o aporte para atingir sua meta de renda.</small>
+      </label>
+      <label class="field">
+        <span>Renda passiva desejada (mensal)</span>
+        <input inputmode="decimal" type="text" id="income_goal" placeholder="R$ 0,00">
+      </label>
+    </div>
+  </section>
+
+  <section class="actions">
+    <button id="calc" class="btn primary">Calcular</button>
+    <button id="clear" class="btn">Limpar</button>
+    <button id="save" class="btn">Salvar no aparelho</button>
+    <button id="print" class="btn">Baixar PDF</button>
+  </section>
+
+  <section class="card results" id="results" hidden>
+    <h2>Resultado</h2>
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="kpi-label">Meses até aposentadoria</div>
+        <div class="kpi-value" id="kpiMonths">—</div>
+        <div class="kpi-sub" id="kpiYears">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Patrimônio projetado</div>
+        <div class="kpi-value" id="kpiFV">—</div>
+        <div class="kpi-sub" id="kpiFVRate">c/ 15% a.a.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Renda passiva estimada</div>
+        <div class="kpi-value" id="kpiPassive">—</div>
+        <div class="kpi-sub" id="kpiPassiveRate">0,6% ao mês</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Aporte necessário</div>
+        <div class="kpi-value" id="kpiPMTNeed">—</div>
+        <div class="kpi-sub" id="kpiGap">Gap para a meta</div>
+      </div>
+    </div>
+
+    <div class="tips card slim" id="tips"></div>
+  </section>
+
+  <footer class="muted foot">
+    <p>
+      Premissas deste simulador: <strong>15% a.a. líquidos de IR</strong> (convertido para taxa mensal composta) e
+      <strong>renda passiva de 0,6% ao mês</strong> sobre o patrimônio acumulado. Valores meramente ilustrativos.
+    </p>
+  </footer>
+</main>
+
+<script src="apos.js"></script>
+</body>
+</html>
